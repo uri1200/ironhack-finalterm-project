@@ -49,7 +49,7 @@ import { useUserStore } from "../stores/user";
 import { storeToRefs } from "pinia";
 
 // Route Variables
-const route = "/auth/sign-up";
+const route = "/auth/signup";
 const buttonText = "Sign Up";
 
 // Input Fields
