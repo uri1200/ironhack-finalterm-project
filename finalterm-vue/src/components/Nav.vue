@@ -25,8 +25,13 @@
 </template>
 
 <script setup>
-import { useUserStore } from '../stores/user'
+
 import { useRouter } from "vue-router";
+import { useUserStore } from "../stores/user";
+import { ref, computed } from "vue";
+
+// Error Message
+const errorMsg = ref("");
 
 //constant to save a variable that will hold the use router method
 const redirect = useRouter();
@@ -41,9 +46,22 @@ const userFullEmail = useUserStore().user.email
 const mailWithoutClient = userFullEmail.split("@")
 
 // async function that calls the signOut method from the useUserStore and pushes the user back to the Auth view.
-const signOut = (() => {
-  userStore.logOut();
-  redirect.push({ path: "/auth/login" });
-});
+const signOut = async () => {
+    try {
+    // calls the user store and send the users info to backend to logIn
+    await useUserStore().signOut();
+    // redirects user to the homeView
+    redirect.push({ path: "/auth/login" });
+  } catch (error) {
+    // displays error message
+    errorMsg.value = error.message;
+    // hides error message
+    setTimeout(() => {
+      errorMsg.value = null;
+    }, 5000);
+    return;
+  }
+  errorMsg.value = 'error';
+};
 
 </script>

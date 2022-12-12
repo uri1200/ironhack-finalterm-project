@@ -1,8 +1,21 @@
 <template>
-<div class="container">
-    <h3>{{task.title}}</h3>
-    <button @click="deleteTask">Delete {{task.title}}</button>
-</div>
+
+    <div class="container border-none max-w-sm h-64 gap-6 m-auto mb-8 text-center p-6 flex flex-col rounded-md shadow-lg bg-zinc-100 bg-opacity-70">
+        <div class="icons flex flex-row w-full justify-between">
+            <div>
+                <fa icon="check" />
+            </div>
+            <div>
+                <fa icon="pen-to-square" />
+            </div>
+            <div>
+                <button @click="deleteTask"><fa icon="trash" /></button>
+            </div>            
+        </div>
+        <h3>{{task.title}}</h3>
+        <h4>{{task.description}}</h4>
+    </div>
+
 </template>
 
 <script setup>
