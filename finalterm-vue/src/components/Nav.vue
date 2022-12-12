@@ -1,81 +1,49 @@
 <template>
-  <nav>
-    <!-- <PersonalRouter :route="route" :buttonText="buttonText" class="logo-link"/> -->
-    <router-link to="/">
-      Home
-    </router-link>
 
-    <ul>
-        <li>
-          <router-link to="/">Task Manager</router-link>
-        </li>
+  <header class="bg-violet-800 w-screen">
+    
+    <nav class="w-screen border-none py-5 px-4 flex m-0 justify-between items-center align-center">
+      <div>
+        <!-- Welcome -->        
+        <p class="hidden md:block font-dosis text-lg text-white">Hello, {{mailWithoutClient[0]}}!</p>
+      </div>
+      <div class="text-white">
+        <!-- Welcome -->        
+        <h1> TodoApp </h1>
+      </div>
+      <div class="" >
+        <!-- Logout button -->
+        <button class="font-dosis text-lg py-3 px-8 rounded-lg self-center 
+        text-center text-white bg-green-600 duration-200 border-lg
+        border-transparent hover:border-white hover:bg-gray-200 hover:text-gray-700" @click="signOut">Log out</button>
+      </div>
+    
+    </nav>
 
-        <li>
-          <router-link to="/account">Your Account</router-link>
-        </li>
-    </ul>
+  </header>
 
-    <div>
-      <ul>
-        <li class="log-out-welcome">
-          <p>Welcome, user</p>
-        </li>
-        <li>
-          <button @click="signOut" class="button">Log out</button>
-        </li>
-      </ul>
-    </div>
-  </nav>
 </template>
 
 <script setup>
-// import PersonalRouter from "./PersonalRouter.vue";
-import { useUserStore } from "../stores/user";
-import { computed } from "vue";
+import { useUserStore } from '../stores/user'
 import { useRouter } from "vue-router";
-import { ref } from 'vue';
 
 //constant to save a variable that will hold the use router method
-const route = "/";
-const buttonText = "Todo app";
-
-// constant to save a variable that will get the user from store with a computed function imported from vue
-// const getUser = computed(() => useUserStore().user);
-const getUser = useUserStore().user;
-
-// constant that calls user email from the useUSerStore
-const userEmail = getUser.email;
-
-// async function that calls the signOut method from the useUserStore and pushes the user back to the Auth view.
 const redirect = useRouter();
 
-const signOut = async () => {
-  try{
-    // call the user store and send the users info to backend to signOut
-    // then redirect user to the homeView
-  } catch (error) {}
-};
+// constant to save a variable that will get the user from store with a computed function imported from vue
+const userStore = useUserStore();
+
+// constant that calls user email from the useUserStore
+const userFullEmail = useUserStore().user.email
+
+// constant that saves the user email and cleans out the @client from the user
+const mailWithoutClient = userFullEmail.split("@")
+
+// async function that calls the signOut method from the useUserStore and pushes the user back to the Auth view.
+const signOut = (() => {
+  userStore.logOut();
+  redirect.push({ path: "/auth/login" });
+});
 
 </script>
-
-<style>
-.navbar-img {
-  width: 90px;
-}
-
-nav {
-  background-color: lightgray;
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-  align-items: center;
-}
-
-nav ul {
-  list-style: none;
-  padding-inline-start: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-</style>
