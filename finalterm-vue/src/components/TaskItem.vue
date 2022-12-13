@@ -1,19 +1,26 @@
 <template>
 
-    <div class="container border-none max-w-sm h-64 gap-6 m-auto mb-8 text-center p-6 flex flex-col rounded-md shadow-lg bg-zinc-100 bg-opacity-70">
-        <div class="icons flex flex-row w-full justify-between">
-            <div>
-                <fa icon="check" />
+    <div class="container border-none max-w-sm h-64 flex flex-col justify-between m-auto mb-8 text-center p-6 rounded-md shadow-lg bg-zinc-100 bg-opacity-70">
+        <div class="flex flex-col gap-6">
+            <div class="icons flex flex-row w-full justify-between">
+                <div>
+                    <fa v-if=task.is_complete icon="check" />
+                    <fa v-else icon="hourglass" />
+                </div>
+                <div>
+                    <fa icon="pen-to-square" />
+                </div>
+                <div>
+                    <button @click="deleteTask"><fa icon="trash" /></button>
+                </div>            
             </div>
-            <div>
-                <fa icon="pen-to-square" />
-            </div>
-            <div>
-                <button @click="deleteTask"><fa icon="trash" /></button>
-            </div>            
+            <h3>{{task.title}}</h3>
+            <h4>{{task.description}}</h4>
         </div>
-        <h3>{{task.title}}</h3>
-        <h4>{{task.description}}</h4>
+        <div class="flex flex-row justify-end">
+            <button>Mark as completed</button>
+        </div>
+        
     </div>
 
 </template>
@@ -23,6 +30,7 @@ import { ref } from 'vue';
 import { useTaskStore } from '../stores/task';
 import { supabase } from '../supabase';
 
+
 const taskStore = useTaskStore();
 
 const props = defineProps({
@@ -31,9 +39,10 @@ const props = defineProps({
 
 // Función para borrar la tarea a través de la store. El problema que tendremos aquí (y en NewTask.vue) es que cuando modifiquemos la base de datos los cambios no se verán reflejados en el v-for de Home.vue porque no estamos modificando la variable tasks guardada en Home. Usad el emit para cambiar esto y evitar ningún page refresh.
 const deleteTask = async() => {
-    await taskStore.deleteTask(props.task.id);
+    //await taskStore.deleteTask(props.task.id);
+    emit("deleteTask", props.task.id)
 };
-
+const emit = defineEmits(["deleteTask", "editTask", "taskDone"]);
 </script>
 
 <style></style>

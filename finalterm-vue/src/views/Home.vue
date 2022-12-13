@@ -2,16 +2,24 @@
   <div class="wrapper">
     <Nav />
 
-    <div class="content"> 
+    <div class="mt-9">
+      <NewTask @addTask="addTasksBack"/>
+    </div>
+    <div class="m-9">
+    <h1 class="text-4xl text-center" >Tasks:</h1>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-4/5 mx-auto">
+      <TaskItem v-for="task in tasks"
+       :key="task.id" 
+       :task="task"
+       @deleteTask="delTaskBack" />
+    </div>
+  </div>
+      <div class="content"> 
       <h3>Your account:</h3>
       <router-link to="/account">Account</router-link>
     </div>
-    <NewTask />
-    <h1>Tasks:</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-4/5 mx-auto">
-      <TaskItem v-for="task in tasks" :key="task.id" :task="task" />
-    </div>
-  </div>
+
 </template>
 
 <script setup>
@@ -30,6 +38,16 @@ const tasks = ref([]);
 // Creamos una función que conecte a la store para conseguir las tareas de supabase
 const getTasks = async() => {
   tasks.value = await taskStore.fetchTasks();
+};
+
+const addTasksBack = async(title, description) => {
+  await taskStore.addTask(title, description);
+  getTasks();
+};
+
+const delTaskBack = async (id) => {
+  await taskStore.deleteTask(id);
+  getTasks();
 };
 
 getTasks();
