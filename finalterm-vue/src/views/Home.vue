@@ -12,7 +12,9 @@
       <TaskItem v-for="task in tasks"
        :key="task.id" 
        :task="task"
-       @deleteTask="delTaskBack" />
+       @deleteTask="delTaskBack"
+       @editTask="editTaskBack"
+       @taskCompleted="completeTaskBack" />
     </div>
   </div>
       <div class="content"> 
@@ -47,6 +49,16 @@ const addTasksBack = async(title, description) => {
 
 const delTaskBack = async (id) => {
   await taskStore.deleteTask(id);
+  getTasks();
+};
+
+const editTaskBack = async (task) => {
+  const res = await taskStore.updateTask(task.id, task.title, task.description);
+  getTasks();
+};
+
+const completeTaskBack = async (task) => {
+  await taskStore.tickTask(task)
   getTasks();
 };
 

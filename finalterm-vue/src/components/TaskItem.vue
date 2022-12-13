@@ -1,48 +1,88 @@
 <template>
+  <div
+    class="container border-none max-w-sm h-64 flex flex-col justify-between m-auto mb-8 text-center p-6 rounded-md shadow-lg bg-zinc-100 bg-opacity-70"
+  >
+    <div class="flex flex-col gap-6">
+      <div class="icons flex flex-row w-full justify-between">
+        <div>
+            <button v-if="task.is_complete" @click="completeTask"><fa icon="check" /></button>
+            <button v-if="!task.is_complete" @click="completeTask"><fa icon="hourglass" /></button>
+        </div>
+        <div>
+          <button @click="editTask"><fa icon="pen-to-square" /></button>
+        </div>
+        <div>
+          <button @click="deleteTask"><fa icon="trash" /></button>
+        </div>
+      </div>
 
-    <div class="container border-none max-w-sm h-64 flex flex-col justify-between m-auto mb-8 text-center p-6 rounded-md shadow-lg bg-zinc-100 bg-opacity-70">
-        <div class="flex flex-col gap-6">
-            <div class="icons flex flex-row w-full justify-between">
-                <div>
-                    <fa v-if=task.is_complete icon="check" />
-                    <fa v-else icon="hourglass" />
-                </div>
-                <div>
-                    <fa icon="pen-to-square" />
-                </div>
-                <div>
-                    <button @click="deleteTask"><fa icon="trash" /></button>
-                </div>            
-            </div>
-            <h3>{{task.title}}</h3>
-            <h4>{{task.description}}</h4>
-        </div>
-        <div class="flex flex-row justify-end">
-            <button>Mark as completed</button>
-        </div>
-        
+<div v-if="editStatus">
+        <form class="relative" @submit.prevent="editedTask">
+          <input class="font-dosis py-2 px-6 text-2xl self-center text-center font-medium mb-2 rounded-md text-gray-900 bg-zinc-100" v-model="editTitle" type="text" placeholder="Task new title" />
+          <input class="font-dosis py-2 px-6 text-xl self-center text-center rounded-md text-gray-900 bg-zinc-100 italic" v-model="editDescription" type="text" placeholder="Task new description" />
+          <button class="font-dosis m-6 py-2 px-6 w-1/2 sm:w-1/3 rounded-md text-lg text-center text-slate-50 bg-green-600 opacity-100
+            duration-200 hover:border-white hover:bg-green-800 hover:text-gray-100 absolute left-12 -bottom-28 sm:left-32 sm:-bottom-20" type="submit">Edit Task</button>
+        </form>
+      </div>
+
+      <!-- inputs -->
+      <div v-if="!editStatus">
+        <h2 class="font-dosis py-2 px-6 text-3xl font-medium mb-2 rounded-md text-gray-900">{{ task.title }}</h2>
+        <p class="font-dosis py-2 px-6 text-2xl rounded-md text-gray-900 italic">{{ task.description }}</p>
+      </div>
     </div>
-
+    <div class="flex flex-row justify-end">
+      <button>Mark as completed</button>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useTaskStore } from '../stores/task';
-import { supabase } from '../supabase';
-
+import { ref } from "vue";
+import { useTaskStore } from "../stores/task";
+import { supabase } from "../supabase";
 
 const taskStore = useTaskStore();
 
+//edit variables
+let editTitle = ref("");
+let editDescription = ref("");
+const editStatus = ref("");
+
+//completed status
+const completed = ref("");
+//define props
 const props = defineProps({
-    task: Object,
+  task: Object,
 });
 
 // Función para borrar la tarea a través de la store. El problema que tendremos aquí (y en NewTask.vue) es que cuando modifiquemos la base de datos los cambios no se verán reflejados en el v-for de Home.vue porque no estamos modificando la variable tasks guardada en Home. Usad el emit para cambiar esto y evitar ningún page refresh.
-const deleteTask = async() => {
-    //await taskStore.deleteTask(props.task.id);
-    emit("deleteTask", props.task.id)
+const deleteTask = async () => {
+  //await taskStore.deleteTask(props.task.id);
+  emit("deleteTask", props.task.id);
 };
-const emit = defineEmits(["deleteTask", "editTask", "taskDone"]);
+
+const editTask = () => {
+  editStatus.value = !editStatus.value
+  editTitle.value = props.task.title;
+  editDescription.value = props.task.description;
+};
+
+const editedTask = () => {
+  let editedTaskValues = {
+        id: props.task.id,
+        title: editTitle.value,
+        description: editDescription.value,
+      };
+  emit("editTask", editedTaskValues);
+  editStatus.value = !editStatus.value
+};
+
+const completeTask = () => {
+  emit("taskCompleted", props.task);
+  completed.value = !completed.value;
+};
+const emit = defineEmits(["deleteTask", "editTask", "taskCompleted"]);
 </script>
 
 <style></style>

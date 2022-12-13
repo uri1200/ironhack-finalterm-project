@@ -1,6 +1,6 @@
 <template>
 
-  <div class="container">
+  <!-- <div class="container">
     <div class="form-side">
       <div class="header">
         <a href="/auth/#" class="header-logo">
@@ -14,7 +14,7 @@
 
       <p v-show="errorMsg" class="error-msg"> {{ errorMsg }} </p>
 
-      <form @submit.prevent="signIn" class="form-sign-in">
+      
         <div class="form">
           <div class="form-logo"></div>
           <div class="form-input">
@@ -36,7 +36,34 @@
       <img src="https://tecnicasdeaprendizaje.net/wp-content/uploads/2020/03/debe-tomar-notas-escribiendo-o-escribiendo.jpg" alt="Notes">
     </div>
 
-  </div>
+  </div> -->
+<div class="h-screen flex imagen ">
+    <div class="flex p-16 justify-center items-center rounded-xl bg-white m-auto">
+      <form class="bg-white">
+        <h1 class="text-gray-800 text-center font-bold text-2xl mb-4">Todo App</h1>
+        <p class="text-sm font-normal text-center text-gray-600 mb-7">Welcome Back :)</p>
+        <p v-show="errorMsg" class="error-msg text-red-500 text-center"> {{ errorMsg }} </p>
+        <form @submit.prevent="signIn" class="form-sign-in">
+          <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+            </svg>
+            <input class="input-field pl-2 outline-none border-none" type="email" placeholder="Email Address" id="email" v-model="email" required>
+          </div>
+          <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+            </svg>
+            <input :type="passwordFieldType" class="input-field pl-2 outline-none border-none" placeholder="Password" id="password" v-model="password" required>
+          </div>
+          <button type="submit" class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Login</button>
+        </form>
+        <span class="text-sm ml-2 hover:text-blue-500 cursor-pointer">Forgot Password ?</span>
+        <p class="text-center">Dont have an account?</p>
+        <p class="text-center"><PersonalRouter :route="route" :buttonText="buttonText" class="sign-up-link hover:text-blue-500"/></p>
+      </form>
+    </div>
+</div>>
 
 </template>
 
@@ -92,157 +119,10 @@ const signIn = async () => {
 
 <style scoped>
 
-.container{
-  display: flex;
-  justify-content: space-between;
-  width: 100vw;
-}
-
-.image-side img{
-  object-fit: cover;
-  width: 50vw;
-  height: 100vh;
-}
-
-.form-input{
-  position: relative;
-}
-
-.form-side{
-  margin: auto;
-  max-width: 747px;
-}
-
-/* .form {
-  display: flex;
-  flex-direction: column;
-  margin: 1rem 0;
-}
-.input {
-  color: black;
-  margin-bottom: 1rem;
-} */
-.button {
-  background-color:#44A8EE;
-  border: none;
-  color: white;
-  padding: 10px 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-
-/* SignIn component */
-
-.header{
-  text-align: center;
-}
-
-.header img{
-  width: 150px;
-}
-
-.header-subtitle{
-  color: #303134;
-}
-
-/* indicamos los estilos para los labels del campo de sign in */
-.input-field-label{
-  display: block;
-  margin-bottom: 10px;
-  font-weight: 500;
-}
-
-.input-field{
-  border-radius: 3px;
-  border: 1px solid #195ABD;
-  margin-bottom: 20px;
-  width: 100%;
-  padding: 10px 0;
-  font-family: 'Barlow', sans-serif;
-
-}
-
-.button{
-  padding: 10px 40px;
-  width: 100%;
-  border-radius: 5px;
-}
-
-a{
-  text-decoration: none;
-  color: #44A8EE;
-  transition: 0.4s;
-}
-
-/* damos el color al hover de los enlaces */
-.sign-up-link:hover {
-  color: #195ABD;
-}
-
-.error-msg{
-  color: red;
-}
-
-.fas{
-  color: #303134;
-  position: absolute;
-  left: 90%;
-  bottom: 30%;
-  opacity: 0.6;
-  transform: translate(-50%, -50%);
-
-}
-
-@media only screen and (max-width: 747px){
-  .container{
-    display: flex;
-    align-items: flex-end;
-    background-image: url('https://tecnicasdeaprendizaje.net/wp-content/uploads/2020/03/debe-tomar-notas-escribiendo-o-escribiendo.jpg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: 0% 0%;
-    height: 100vh;
-  }
-
-  .image-side{
-    display: none;
-  }
-
-  .form-side{
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    width: 100%;
-    border-radius: 90px 90px 0 0;
-  }
-
-  .form-sign-in{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .form-side{
-    margin: 0 auto;
-  }
-
-  .header{
-    display: flex; 
-    justify-content: center;
-  }
-
-  .header-description{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .fas{
-    display: none;
-  }
-
+.imagen {
+  background-image: url('https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2021/06/post-it-2382319.jpg?tf=1200x');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 </style>
