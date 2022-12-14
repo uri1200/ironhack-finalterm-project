@@ -1,8 +1,8 @@
 <template>
     <div class="add-task w-4/5 flex flex-col justify-center m-auto shadow-2xl bg-blue-900 align-center rounded-3xl ">
         <div class="my-4">
-            <div class="text-center text-white text-3xl">
-                <h1>Add a new Task</h1>
+            <div class="text-center text-white text-3xl font-semibold">
+                <h1>Add new Task</h1>
             </div>
             <div class="text-center" v-if="showErrorMessage">
                 <p class="error-text text-red-500">{{ errorMessage }}</p>

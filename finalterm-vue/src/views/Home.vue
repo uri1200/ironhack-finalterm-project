@@ -4,8 +4,9 @@
     <section class="mt-9">
       <NewTask @addTask="addTasksBack"/>
     </section>
-    <div class="m-9">
-    <h1 class="text-4xl text-center" >Tasks:</h1>
+    <div class="my-7  flex flex-row justify-center">
+      
+    <!-- <h1 class="text-4xl text-center text-slate-700 text-4xl font-bold bg-slate-100 p-3 rounded-3xl w-4/5 " >Tasks</h1> -->
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lgplus:grid-cols-3 3xl:grid-cols-4 gap-8 w-4/5 justify-items-center mx-auto ">
       <TaskItem v-for="task in tasks"

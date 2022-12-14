@@ -1,13 +1,13 @@
 <template>
   <header class="bg-slate-700">
-    <nav class="py-3 px-4 flex m-0 justify-between items-center align-center">
-      <div class="w-16">
+    <nav class="py-3 px-4 flex justify-between items-center align-center">
+      <div class="w-16 hidden md:inline">
         <!-- Welcome -->
         <!-- <p class="hidden md:block font-dosis text-lg text-white">Hello, {{mailWithoutClient[0]}}!</p> -->
         <img class="rounded-full" src="..\assets\logo.png" alt="" />
       </div>
       <div
-        class="flex flex-row text-slate-700 text-4xl font-bold bg-slate-100 p-3 rounded-3xl"
+        class=" text-slate-700 text-4xl font-bold bg-slate-100 p-3 rounded-3xl ml-4"
       >
         <h1>ToDoApp</h1>
       </div>

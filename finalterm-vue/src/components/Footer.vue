@@ -3,7 +3,7 @@
     
       <div>
         <!-- Welcome -->        
-        <p class="hidden md:block font-dosis text-lg text-white">Gracias por usar la aplicacion ToDoApp, Copyright 2023 © Oriol Soler</p> 
+        <p class="hidden md:block font-dosis text-lg text-white">Gracias por usar ToDoApp, Copyright 2023 © Oriol Soler</p> 
       </div>
   </footer>
 </template>

@@ -40,7 +40,7 @@
 <div class="h-screen flex imagen ">
     <div class="flex p-16 justify-center items-center rounded-xl bg-white m-auto">
       <form class="bg-white">
-        <h1 class="text-gray-800 text-center font-bold text-2xl mb-4">Todo App</h1>
+        <h1 class="text-gray-800 text-center font-bold text-2xl mb-4">TodoApp</h1>
         <p class="text-sm font-normal text-center text-gray-600 mb-7">Welcome Back :)</p>
         <p v-show="errorMsg" class="error-msg text-red-500 text-center"> {{ errorMsg }} </p>
         <form @submit.prevent="signIn" class="form-sign-in">
@@ -58,9 +58,9 @@
           </div>
           <button type="submit" class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Login</button>
         </form>
-        <span class="text-sm ml-2 hover:text-blue-500 cursor-pointer">Forgot Password ?</span>
-        <p class="text-center">Dont have an account?</p>
-        <p class="text-center"><PersonalRouter :route="route" :buttonText="buttonText" class="sign-up-link hover:text-blue-500"/></p>
+        <span class="text-sm ml-2 mb-7 hover:text-blue-500 cursor-pointer">Forgot Password ?</span>
+        <p class="text-center mt-4">Dont have an account?</p>
+        <p class="text-center text-lg"><PersonalRouter :route="route" :buttonText="buttonText" class="sign-up-link hover:text-blue-500"/></p>
       </form>
     </div>
 </div>>
