@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper bgmountain">
+  <div class="wrapper bgmountain pb-8">
     <Nav />
     <section class="mt-9">
       <NewTask @addTask="addTasksBack"/>
@@ -7,7 +7,7 @@
     <div class="m-9">
     <h1 class="text-4xl text-center" >Tasks:</h1>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-4/5 mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 lgplus:grid-cols-3 3xl:grid-cols-4 gap-8 w-4/5 justify-items-center mx-auto ">
       <TaskItem v-for="task in tasks"
        :key="task.id" 
        :task="task"
@@ -16,6 +16,7 @@
        @taskCompleted="completeTaskBack" />
     </div>
   </div>
+  <Footer />
     <!-- <div class="content"> 
       <h3>Your account:</h3>
       <router-link to="/account">Account</router-link>
@@ -30,6 +31,7 @@ import { useRouter } from 'vue-router';
 import Nav from '../components/Nav.vue';
 import NewTask from '../components/NewTask.vue';
 import TaskItem from '../components/TaskItem.vue';
+import Footer from '../components/Footer.vue';
 
 const taskStore = useTaskStore();
 

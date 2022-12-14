@@ -27,8 +27,8 @@
 </script>
 
 <style>
-img {
+/* img {
   width: 200px;
   border-radius: 50%;
-}
+} */
 </style>

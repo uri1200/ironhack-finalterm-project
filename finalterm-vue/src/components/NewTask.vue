@@ -1,5 +1,5 @@
 <template>
-    <div class="add-task w-4/5 flex flex-col justify-center m-auto border-4 bg-indigo-600 align-center rounded-3xl ">
+    <div class="add-task w-4/5 flex flex-col justify-center m-auto shadow-2xl bg-blue-900 align-center rounded-3xl ">
         <div class="my-4">
             <div class="text-center text-white text-3xl">
                 <h1>Add a new Task</h1>
@@ -9,15 +9,15 @@
             </div>
             <div class="flex flex-col">
                 <div class="input-field mt-4 mb-2 w-[90%] mx-auto">
-                    <input class="bg-sky-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 " type="text" placeholder="Add a Task Title - Listen to Kendrick Lamar" v-model="name">
+                    <input class="bg-slate-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 " type="text" placeholder="Add a Task Title - Listen to Kendrick Lamar" v-model="name">
                 </div>
                 <div class="input-field mt-2 mb-6 w-[90%] mx-auto">
                     <!-- <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" type="text" placeholder="Add a Task Description" v-model="description"> -->
-                    <textarea class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" rows="4" placeholder="Add a Task Description" v-model="description"></textarea>
+                    <textarea class="bg-slate-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" rows="4" placeholder="Add a Task Description" v-model="description"></textarea>
                 </div>
-                <button @click="addTask" class="button font-dosis text-lg py-3 px-8 rounded-lg self-center 
-            text-center text-white bg-green-500 duration-200 border-lg
-            border-transparent hover:border-white hover:bg-green-300 hover:text-gray-700">Add Task</button>
+                <button @click="addTask" class="button font-dosis text-xl py-3 px-7 rounded-lg self-center 
+            text-center text-white bg-teal-400 duration-200 border-lg
+            border-transparent hover:border-white hover:bg-teal-500 ">Add Task</button>
             </div>
         </div>
     </div>

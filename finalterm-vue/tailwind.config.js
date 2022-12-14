@@ -2,7 +2,12 @@
 module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}", ],
   theme: {
-      extend: {},
+      extend: {
+        screens: {
+          'lgplus': '1150px',
+          '3xl': '1736px',
+        }
+      },
   },
   plugins: [],
 }
