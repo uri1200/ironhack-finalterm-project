@@ -33,4 +33,6 @@ onMounted(async () => {
 });
 </script>
 
-<style></style>
+<style>
+
+</style>

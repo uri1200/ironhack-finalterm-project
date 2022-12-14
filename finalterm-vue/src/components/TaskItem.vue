@@ -1,38 +1,73 @@
 <template>
   <div
-    class="container border-none max-w-sm h-64 flex flex-col justify-between m-auto mb-8 text-center p-6 rounded-md shadow-lg bg-zinc-100 bg-opacity-70"
+     class="container border-none max-w-sm h-64 flex flex-col m-auto mb-4 text-center p-6 rounded-md shadow-lg bg-opacity-70"
+     :class="task.is_complete ? 'bg-emerald-100' : 'bg-fuchsia-100'"
   >
     <div class="flex flex-col gap-6">
       <div class="icons flex flex-row w-full justify-between">
-        <div>
-            <button v-if="task.is_complete" @click="completeTask"><fa icon="check" /></button>
-            <button v-if="!task.is_complete" @click="completeTask"><fa icon="hourglass" /></button>
+        <div v-if="!task.is_complete">
+          <button
+            class="px-4 py-2 bg-emerald-400 hover:bg-emerald-500 text-white rounded-xl"
+            @click="completeTask"
+          >
+            <fa icon="check" />
+          </button>
+          <!-- <button class="px-4 py-2 bg-red-500 text-white rounded-xl" v-if="!task.is_complete" @click="completeTask"><fa icon="hourglass" /></button> -->
         </div>
         <div>
-          <button @click="editTask"><fa icon="pen-to-square" /></button>
+          <button
+            class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-xl"
+            @click="editTask"
+          >
+            <fa icon="pen-to-square" />
+          </button>
         </div>
         <div>
-          <button @click="deleteTask"><fa icon="trash" /></button>
+          <button
+            class="px-4 py-2 bg-red-400 hover:bg-red-500 text-white rounded-xl"
+            @click="deleteTask"
+          >
+            <fa icon="trash" />
+          </button>
         </div>
       </div>
 
-<div v-if="editStatus">
+      <div v-if="editStatus">
         <form class="relative" @submit.prevent="editedTask">
-          <input class="font-dosis py-2 px-6 text-2xl self-center text-center font-medium mb-2 rounded-md text-gray-900 bg-zinc-100" v-model="editTitle" type="text" placeholder="Task new title" />
-          <input class="font-dosis py-2 px-6 text-xl self-center text-center rounded-md text-gray-900 bg-zinc-100 italic" v-model="editDescription" type="text" placeholder="Task new description" />
-          <button class="font-dosis m-6 py-2 px-6 w-1/2 sm:w-1/3 rounded-md text-lg text-center text-slate-50 bg-green-600 opacity-100
-            duration-200 hover:border-white hover:bg-green-800 hover:text-gray-100 absolute left-12 -bottom-28 sm:left-32 sm:-bottom-20" type="submit">Edit Task</button>
+          <input
+            class="font-dosis py-2 px-6 text-2xl self-center text-center font-medium mb-2 rounded-md text-gray-900 bg-zinc-100"
+            v-model="editTitle"
+            type="text"
+            placeholder="Task new title"
+          />
+          <input
+            class="font-dosis py-2 px-6 text-xl self-center text-center rounded-md text-gray-900 bg-zinc-100 italic"
+            v-model="editDescription"
+            type="text"
+            placeholder="Task new description"
+          />
+          <button
+            class="font-dosis m-6 py-2 px-6 w-1/2 sm:w-1/3 rounded-md text-lg text-center text-slate-50 bg-green-600 opacity-100 duration-200 hover:border-white hover:bg-green-800 hover:text-gray-100 absolute left-12 -bottom-28 sm:left-32 sm:-bottom-20"
+            type="submit"
+          >
+            Edit Task
+          </button>
         </form>
       </div>
 
       <!-- inputs -->
       <div v-if="!editStatus">
-        <h2 class="font-dosis py-2 px-6 text-3xl font-medium mb-2 rounded-md text-gray-900">{{ task.title }}</h2>
-        <p class="font-dosis py-2 px-6 text-2xl rounded-md text-gray-900 italic">{{ task.description }}</p>
+        <h2
+          class="font-dosis py-2 px-6 text-3xl font-medium mb-2 rounded-md text-gray-900"
+        >
+          {{ task.title }}
+        </h2>
+        <p
+          class="font-dosis py-2 px-6 text-2xl rounded-md text-gray-900 italic"
+        >
+          {{ task.description }}
+        </p>
       </div>
-    </div>
-    <div class="flex flex-row justify-end">
-      <button>Mark as completed</button>
     </div>
   </div>
 </template>
@@ -63,19 +98,19 @@ const deleteTask = async () => {
 };
 
 const editTask = () => {
-  editStatus.value = !editStatus.value
+  editStatus.value = !editStatus.value;
   editTitle.value = props.task.title;
   editDescription.value = props.task.description;
 };
 
 const editedTask = () => {
   let editedTaskValues = {
-        id: props.task.id,
-        title: editTitle.value,
-        description: editDescription.value,
-      };
+    id: props.task.id,
+    title: editTitle.value,
+    description: editDescription.value,
+  };
   emit("editTask", editedTaskValues);
-  editStatus.value = !editStatus.value
+  editStatus.value = !editStatus.value;
 };
 
 const completeTask = () => {

@@ -1,21 +1,21 @@
 <template>
 
-  <header class="bg-violet-800 w-screen">
+  <header class="bg-indigo-900 ">
     
-    <nav class="w-screen border-none py-5 px-4 flex m-0 justify-between items-center align-center">
+    <nav class="py-5 px-4 flex m-0 justify-between items-center align-center">
       <div>
         <!-- Welcome -->        
         <p class="hidden md:block font-dosis text-lg text-white">Hello, {{mailWithoutClient[0]}}!</p>
       </div>
-      <div class="text-white">
+      <div class="text-white text-5xl font-weight-500">
         <!-- Welcome -->        
-        <h1> TodoApp </h1>
+        <h1> Panel </h1>
       </div>
       <div class="" >
         <!-- Logout button -->
         <button class="font-dosis text-lg py-3 px-8 rounded-lg self-center 
-        text-center text-white bg-green-600 duration-200 border-lg
-        border-transparent hover:border-white hover:bg-gray-200 hover:text-gray-700" @click="signOut">Log out</button>
+        text-center hover:text-white hover:bg-red-500 duration-200 border-lg
+        border-transparent hover:border-white bg-gray-200 text-gray-700" @click="signOut">Log out</button>
       </div>
     
     </nav>

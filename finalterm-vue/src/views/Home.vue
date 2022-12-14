@@ -1,10 +1,9 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper bgmountain">
     <Nav />
-
-    <div class="mt-9">
+    <section class="mt-9">
       <NewTask @addTask="addTasksBack"/>
-    </div>
+    </section>
     <div class="m-9">
     <h1 class="text-4xl text-center" >Tasks:</h1>
     </div>
@@ -17,10 +16,10 @@
        @taskCompleted="completeTaskBack" />
     </div>
   </div>
-      <div class="content"> 
+    <!-- <div class="content"> 
       <h3>Your account:</h3>
       <router-link to="/account">Account</router-link>
-    </div>
+    </div> -->
 
 </template>
 
@@ -66,7 +65,13 @@ getTasks();
 
 </script>
 
-<style></style>
+<style>
+.bgmountain{
+  background-image: url(..\assets\background-mountains.png);
+  background-size: cover;
+  background-attachment: fixed;
+}
+</style>
 
 <!-- 
 **Hints**
