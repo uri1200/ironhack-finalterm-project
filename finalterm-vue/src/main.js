@@ -7,14 +7,13 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 
 import App from "./App.vue";
 import router from "./router";
-import './index.css'
-import './assets/style.css';
-
+import "./index.css";
+import "./assets/style.css";
 
 library.add(fas, fab);
 const app = createApp(App);
 
-app.component('fa', FontAwesomeIcon)
+app.component("fa", FontAwesomeIcon);
 app.use(createPinia());
 app.use(router);
 

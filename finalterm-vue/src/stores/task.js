@@ -3,7 +3,6 @@ import { supabase } from "../supabase";
 import { useUserStore } from "./user";
 
 export const useTaskStore = defineStore("tasks", {
-  
   state: () => ({
     tasks: null,
   }),
@@ -16,7 +15,7 @@ export const useTaskStore = defineStore("tasks", {
       this.tasks = tasks;
       return this.tasks;
     },
-    
+
     async addTask(title, description) {
       const { data, error } = await supabase.from("tasks").insert([
         {
@@ -28,29 +27,29 @@ export const useTaskStore = defineStore("tasks", {
       ]);
     },
 
-    // deletes a task from supabase. 
+    // deletes a task from supabase.
     async deleteTask(taskId) {
       const { data, error } = await supabase
-        .from('tasks')
+        .from("tasks")
         .delete()
-        .eq('id', taskId);
+        .eq("id", taskId);
     },
 
     async updateTask(id, title, description) {
       const { data, error } = await supabase
         .from("tasks")
-        .update({ 
-          title: title, 
-          description: description })
+        .update({
+          title: title,
+          description: description,
+        })
         .match({ id: id });
     },
-    
+
     async tickTask(task) {
       const { data, error } = await supabase
-        .from('tasks')
-        .update({ 'is_complete': !task.is_complete })
-        .eq('id', task.id);
+        .from("tasks")
+        .update({ is_complete: !task.is_complete })
+        .eq("id", task.id);
     },
   },
-
 });
