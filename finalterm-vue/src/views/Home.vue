@@ -69,7 +69,7 @@ getTasks();
 
 <style>
 .bgmountain {
-  background-image: url(..\assets\background-mountains.png);
+  background-image: url(../assets/background-mountains.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
