@@ -4,7 +4,7 @@
   >
     <div>
       <!-- Welcome -->
-      <p class="hidden md:block font-dosis text-lg text-white">
+      <p class="font-dosis text-lg text-white">
         Gracias por usar ToDoApp, Copyright 2023 © Oriol Soler
       </p>
     </div>

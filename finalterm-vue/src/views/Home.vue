@@ -1,7 +1,8 @@
 <template>
   <section class="">
-    <Nav />
-    <div class="wrapper bgmountain">
+    
+    <div class="wrapper bgmountain min-h-screen">
+      <Nav />
       <div class="py-9">
         <NewTask @addTask="addTasksBack" />
       </div>
@@ -74,7 +75,7 @@ getTasks();
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  height: 100vh;
+
 }
 </style>
 

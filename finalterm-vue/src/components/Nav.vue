@@ -9,7 +9,7 @@
       <div
         class="text-slate-700 text-4xl font-bold bg-slate-100 p-3 rounded-3xl ml-3"
       >
-        <h1>ToDoApp</h1>
+        <a href="/">ToDoApp</a>
       </div>
       <div class="">
         <Menu as="div" class="relative inline-block text-left">
