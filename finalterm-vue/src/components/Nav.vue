@@ -7,30 +7,88 @@
         <img class="rounded-full" src="..\assets\logo.png" alt="" />
       </div>
       <div
-        class=" text-slate-700 text-4xl font-bold bg-slate-100 p-3 rounded-3xl ml-4"
+        class="text-slate-700 text-4xl font-bold bg-slate-100 p-3 rounded-3xl ml-3"
       >
         <h1>ToDoApp</h1>
       </div>
       <div class="">
-        <!-- Logout button -->
-        <!-- <button class="font-dosis text-lg py-2 px-5 rounded-lg self-center 
-        text-center hover:text-white hover:bg-red-500 duration-200 border-lg
-        border-transparent hover:border-white bg-gray-200 text-gray-700" @click="signOut">Log out</button> -->
-        <div class="flex flex-row font-dosis text-lg px-2 rounded-lg duration-200 bg-slate-100 items-center hover:bg-slate-300 text-slate-700">
-          <button
-            class=" mr-1 pb-2 hover:bg-slate-300 rounded-full text-center h-5"
-            @click="signOut"
+        <Menu as="div" class="relative inline-block text-left">
+          <div>
+            <MenuButton
+              class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white pr-2 pt-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-offset-2 focus:ring-offset-gray-100"
+            >
+              <fa
+                class="pb-4 pt-2 px-2 h-4 w-4"
+                aria-hidden="true"
+                icon="angle-down"
+              />
+              <img
+                class="w-8 rounded-full"
+                src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
+                alt=""
+              />
+            </MenuButton>
+          </div>
+          <transition
+            enter-active-class="transition ease-out duration-100"
+            enter-from-class="transform opacity-0 scale-95"
+            enter-to-class="transform opacity-100 scale-100"
+            leave-active-class="transition ease-in duration-75"
+            leave-from-class="transform opacity-100 scale-100"
+            leave-to-class="transform opacity-0 scale-95"
           >
-            <fa icon="angle-down" />
-          </button>
-          <img class="w-10 p-1 rounded-full" src="..\assets\profile.webp" alt="" />
-        </div>
+            <MenuItems
+              class="absolute right-0 z-10 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+            >
+              <div class="py-1">
+                <MenuItem v-slot="{ active }">
+                  <p
+                    :class="[
+                      active ? 'text-gray-900' : 'text-gray-700',
+                      'block px-4 py-2 text-lg',
+                    ]"
+                    class="font-bold"
+                  >
+                    Hello, {{ mailWithoutClient[0] }}
+                  </p>
+                </MenuItem>
+              </div>
+              <div class="py-1">
+                <MenuItem v-slot="{ active }">
+                  <a
+                    href="/account"
+                    :class="[
+                      active ? 'bg-slate-100 text-gray-900' : 'text-gray-700',
+                      'block px-4 py-2 text-md',
+                    ]"
+                    >Account settings</a
+                  >
+                </MenuItem>
+                <MenuItem v-slot="{ active }">
+                  <button
+                    type="submit"
+                    :class="[
+                      active ? 'bg-slate-100' : 'text-gray-700',
+                      'block w-full px-4 py-2 text-left text-md',
+                    ]"
+                    class="text-red-500"
+                    @click="signOut"
+                  >
+                    <fa class="w-[14px]" aria-hidden="true" icon="sign-out" />
+                    Sign out
+                  </button>
+                </MenuItem>
+              </div>
+            </MenuItems>
+          </transition>
+        </Menu>
       </div>
     </nav>
   </header>
 </template>
 
 <script setup>
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "../stores/user";
 import { ref, computed } from "vue";

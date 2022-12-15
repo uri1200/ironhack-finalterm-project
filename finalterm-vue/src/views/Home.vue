@@ -1,38 +1,38 @@
 <template>
-  <div class="wrapper bgmountain pb-8">
+  <section class="">
     <Nav />
-    <section class="mt-9">
-      <NewTask @addTask="addTasksBack"/>
-    </section>
-    <div class="my-7  flex flex-row justify-center">
-      
-    <!-- <h1 class="text-4xl text-center text-slate-700 text-4xl font-bold bg-slate-100 p-3 rounded-3xl w-4/5 " >Tasks</h1> -->
+    <div class="wrapper bgmountain">
+      <div class="py-9">
+        <NewTask @addTask="addTasksBack" />
+      </div>
+      <div class="my-7 flex flex-row justify-center">
+        <!-- <h1 class="text-4xl text-center text-slate-700 text-4xl font-bold bg-slate-100 p-3 rounded-3xl w-4/5 " >Tasks</h1> -->
+      </div>
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lgplus:grid-cols-3 3xl:grid-cols-4 gap-8 w-4/5 justify-items-center mx-auto"
+      >
+        <TaskItem
+          v-for="task in tasks"
+          :key="task.id"
+          :task="task"
+          @deleteTask="delTaskBack"
+          @editTask="editTaskBack"
+          @taskCompleted="completeTaskBack"
+        />
+      </div>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lgplus:grid-cols-3 3xl:grid-cols-4 gap-8 w-4/5 justify-items-center mx-auto ">
-      <TaskItem v-for="task in tasks"
-       :key="task.id" 
-       :task="task"
-       @deleteTask="delTaskBack"
-       @editTask="editTaskBack"
-       @taskCompleted="completeTaskBack" />
-    </div>
-  </div>
-  <Footer />
-    <!-- <div class="content"> 
-      <h3>Your account:</h3>
-      <router-link to="/account">Account</router-link>
-    </div> -->
-
+    <Footer />
+  </section>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 import { useTaskStore } from "../stores/task";
-import { useRouter } from 'vue-router';
-import Nav from '../components/Nav.vue';
-import NewTask from '../components/NewTask.vue';
-import TaskItem from '../components/TaskItem.vue';
-import Footer from '../components/Footer.vue';
+import { useRouter } from "vue-router";
+import Nav from "../components/Nav.vue";
+import NewTask from "../components/NewTask.vue";
+import TaskItem from "../components/TaskItem.vue";
+import Footer from "../components/Footer.vue";
 
 const taskStore = useTaskStore();
 
@@ -40,11 +40,11 @@ const taskStore = useTaskStore();
 const tasks = ref([]);
 
 // Creamos una función que conecte a la store para conseguir las tareas de supabase
-const getTasks = async() => {
+const getTasks = async () => {
   tasks.value = await taskStore.fetchTasks();
 };
 
-const addTasksBack = async(title, description) => {
+const addTasksBack = async (title, description) => {
   await taskStore.addTask(title, description);
   getTasks();
 };
@@ -60,19 +60,21 @@ const editTaskBack = async (task) => {
 };
 
 const completeTaskBack = async (task) => {
-  await taskStore.tickTask(task)
+  await taskStore.tickTask(task);
   getTasks();
 };
 
 getTasks();
-
 </script>
 
 <style>
-.bgmountain{
+.bgmountain {
   background-image: url(..\assets\background-mountains.png);
+  background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
   background-attachment: fixed;
+  height: 100vh;
 }
 </style>
 

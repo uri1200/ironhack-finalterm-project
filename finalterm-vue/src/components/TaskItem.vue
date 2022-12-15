@@ -24,7 +24,7 @@
         </div>
         <div>
           <button
-            class="px-4 py-2 bg-red-400 hover:bg-red-500 text-white rounded-xl"
+            class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl"
             @click="deleteTask"
           >
             <fa icon="trash" />
@@ -35,12 +35,12 @@
       <div v-if="editStatus">
         <form class="" @submit.prevent="editedTask">
           <input
-            class="font-dosis py-1 px-2 w-full text-xl self-center font-medium my-2 rounded-md text-gray-900 bg-zinc-100"
+            class="font-dosis py-1 px-2 w-full text-xl self-center font-medium my-2 rounded-md text-gray-900 bg-slate-100"
             v-model="editTitle"
             type="text"
             placeholder="Task new title"
           />
-            <textarea class="font-dosis w-full px-2 text-lg self-center rounded-md text-gray-900 bg-zinc-100 italic"
+            <textarea class="font-dosis w-full px-2 text-lg self-center rounded-md text-gray-900 bg-slate-100 italic"
             rows="4" 
             v-model="editDescription"
             type="text"
