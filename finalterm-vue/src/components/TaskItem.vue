@@ -78,6 +78,7 @@
 import { ref } from "vue";
 import { useTaskStore } from "../stores/task";
 import { supabase } from "../supabase";
+import Swal from 'sweetalert2';
 
 const taskStore = useTaskStore();
 
@@ -96,7 +97,25 @@ const props = defineProps({
 // Función para borrar la tarea a través de la store. El problema que tendremos aquí (y en NewTask.vue) es que cuando modifiquemos la base de datos los cambios no se verán reflejados en el v-for de Home.vue porque no estamos modificando la variable tasks guardada en Home. Usad el emit para cambiar esto y evitar ningún page refresh.
 const deleteTask = async () => {
   //await taskStore.deleteTask(props.task.id);
-  emit("deleteTask", props.task.id);
+Swal.fire({
+  title: 'Are you sure to delete this task?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#d33',
+  cancelButtonColor: '#3085d6',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    emit("deleteTask", props.task.id);
+    Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+  }
+})
+  
 };
 
 const editTask = () => {
@@ -107,6 +126,7 @@ const editTask = () => {
 };
 
 const editedTask = () => {
+  
   let editedTaskValues = {
     id: props.task.id,
     title: editTitle.value,
@@ -115,13 +135,26 @@ const editedTask = () => {
   emit("editTask", editedTaskValues);
   editStatus.value = !editStatus.value;
   if (completed.value) {
-    completeTask();
+    openTask();
   }
 };
 
-const completeTask = () => {
+const openTask = () => {
   emit("taskCompleted", props.task);
   completed.value = !completed.value;
+};
+
+const completeTask = () => {
+  if (!emit("taskCompleted", props.task)) {
+    Swal.fire({
+      icon: 'success',
+      title: 'Task completed',
+      showConfirmButton: false,
+      timer: 1500
+    })
+      completed.value = !completed.value;
+  }
+
 };
 const emit = defineEmits(["deleteTask", "editTask", "taskCompleted"]);
 </script>
