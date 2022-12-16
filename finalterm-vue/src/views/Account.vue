@@ -1,6 +1,7 @@
 <template>
   <Nav />
-  <h1>Name: {{ username }}</h1>
+  <!-- <h1>Name: {{ username }}</h1> -->
+  <h1 class="text-2xl">Account: {{ userFullEmail }}</h1>
   <img
     :src="
       avatar_url
@@ -21,6 +22,7 @@ const userStore = useUserStore();
 
 const username = ref(null);
 const avatar_url = ref(null);
+const userFullEmail = useUserStore().user.email;
 
 onMounted(() => {
   getProfile();

@@ -1,41 +1,5 @@
 <template>
-  <!-- <div class="container">
-    <div class="form-side">
-      <div class="header">
-        <a href="/auth/#" class="header-logo">
-          <img src="https://play-lh.googleusercontent.com/PH-2iORSfQs-iizoHzePXBaJCXml443pgoC14-lZESLFIp78A4SvxLKUVv1FyIQFtC8" alt="Logo-ToDo-App">
-        </a>
-        <div class="header-description">
-          <h3 class="header-title">Log In to ToDo App</h3>
-          <p class="header-subtitle">Start organizing your tasks!</p>
-        </div>
-      </div>
 
-      <p v-show="errorMsg" class="error-msg"> {{ errorMsg }} </p>
-
-      
-        <div class="form">
-          <div class="form-logo"></div>
-          <div class="form-input">
-            <label class="input-field-label">E-mail</label>
-            <input type="email" class="input-field" placeholder="example@gmail.com" id="email" v-model="email" required>
-          </div>
-          <div class="form-input">
-            <label class="input-field-label">Password</label>
-            <input :type="passwordFieldType" class="input-field" placeholder="**********" id="password" v-model="password" required>
-            <i class="fas fa-eye-slash fa-sm" @click="changePasswordFieldValue"></i>
-          </div>
-          <button class="button">Sign In</button>
-          <p>Dont have an account? <PersonalRouter :route="route" :buttonText="buttonText" class="sign-up-link"/></p>
-        </div>
-      </form>
-    </div>
-
-    <div class="image-side">
-      <img src="https://tecnicasdeaprendizaje.net/wp-content/uploads/2020/03/debe-tomar-notas-escribiendo-o-escribiendo.jpg" alt="Notes">
-    </div>
-
-  </div> -->
   <div class="h-screen flex imagen">
     <div
       class="flex p-16 justify-center items-center rounded-xl bg-white m-auto"
@@ -99,7 +63,7 @@
           </div>
           <button
             type="submit"
-            class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
+            class="block w-full bg-blue-900 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
           >
             Login
           </button>

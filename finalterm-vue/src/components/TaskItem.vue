@@ -1,7 +1,7 @@
 <template>
   <div
-     class="container border-none max-w-sm flex flex-col mb-4 p-6 rounded-md shadow-xl bg-opacity-70 h-fit"
-     :class="task.is_complete ? 'bg-emerald-100' : 'bg-fuchsia-100'"
+    class="container border-none max-w-sm flex flex-col mb-4 p-6 rounded-md shadow-xl bg-opacity-70 h-fit"
+    :class="task.is_complete ? 'bg-emerald-100' : 'bg-fuchsia-100'"
   >
     <div class="flex flex-col">
       <div class="icons flex flex-row w-full justify-between">
@@ -40,18 +40,20 @@
             type="text"
             placeholder="Task new title"
           />
-            <textarea class="font-dosis w-full px-2 text-lg self-center rounded-md text-gray-900 bg-slate-100 italic"
-            rows="4" 
+          <textarea
+            class="font-dosis w-full px-2 text-lg self-center rounded-md text-gray-900 bg-slate-100 italic"
+            rows="4"
             v-model="editDescription"
             type="text"
-            placeholder="Task new description">
-            </textarea>
+            placeholder="Task new description"
+          >
+          </textarea>
           <div class="flex flex-row-reverse">
             <button
-                class="font-dosis py-1 px-6 w-1/2 sm:w-1/3 rounded-md text-lg text-slate-50 bg-green-600 opacity-100 duration-200 hover:border-white hover:bg-green-800 hover:text-gray-100 left-12 -bottom-28 sm:left-32 sm:-bottom-20"
-                type="submit"
+              class="font-dosis py-1 px-6 w-1/2 sm:w-1/3 rounded-md text-lg text-slate-50 bg-green-600 opacity-100 duration-200 hover:border-white hover:bg-green-800 hover:text-gray-100 left-12 -bottom-28 sm:left-32 sm:-bottom-20"
+              type="submit"
             >
-                Edit
+              Edit
             </button>
           </div>
         </form>
@@ -65,7 +67,7 @@
           {{ task.title }}
         </h2>
         <p
-          class="font-dosis py-2 text-lg rounded-md text-gray-900 italic whitespace-pre-wrap break-all "
+          class="font-dosis py-2 text-lg rounded-md text-gray-900 italic whitespace-pre-wrap break-all"
         >
           {{ task.description }}
         </p>
@@ -78,7 +80,7 @@
 import { ref } from "vue";
 import { useTaskStore } from "../stores/task";
 import { supabase } from "../supabase";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 const taskStore = useTaskStore();
 
@@ -97,36 +99,36 @@ const props = defineProps({
 // Función para borrar la tarea a través de la store. El problema que tendremos aquí (y en NewTask.vue) es que cuando modifiquemos la base de datos los cambios no se verán reflejados en el v-for de Home.vue porque no estamos modificando la variable tasks guardada en Home. Usad el emit para cambiar esto y evitar ningún page refresh.
 const deleteTask = async () => {
   //await taskStore.deleteTask(props.task.id);
-Swal.fire({
-  title: 'Are you sure to delete this task?',
-  text: "You won't be able to revert this!",
-  icon: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#d33',
-  cancelButtonColor: '#3085d6',
-  confirmButtonText: 'Yes, delete it!'
-}).then((result) => {
-  if (result.isConfirmed) {
-    emit("deleteTask", props.task.id);
-    Swal.fire(
-      'Deleted!',
-      'Your file has been deleted.',
-      'success'
-    )
-  }
-})
-  
+  Swal.fire({
+    title: "Are you sure to delete this task?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      emit("deleteTask", props.task.id);
+      Swal.fire("Deleted!", "Your file has been deleted.", "success");
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
+    }
+  });
 };
 
 const editTask = () => {
   editStatus.value = !editStatus.value;
   editTitle.value = props.task.title;
   editDescription.value = props.task.description;
-  completed.value = props.task.is_complete
+  completed.value = props.task.is_complete;
 };
 
 const editedTask = () => {
-  
   let editedTaskValues = {
     id: props.task.id,
     title: editTitle.value,
@@ -147,12 +149,19 @@ const openTask = () => {
 const completeTask = () => {
   if (!emit("taskCompleted", props.task)) {
     Swal.fire({
-      icon: 'success',
-      title: 'Task completed',
+      icon: "success",
+      title: "Task completed",
       showConfirmButton: false,
-      timer: 1500
-    })
-      completed.value = !completed.value;
+      timer: 1500,
+    });
+    completed.value = !completed.value;
+  }
+  else {
+          Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
   }
 
 };

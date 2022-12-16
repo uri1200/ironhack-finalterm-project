@@ -84,10 +84,17 @@
           </div>
           <button
             type="submit"
-            class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
+            class="block w-full bg-blue-900 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
           >
             Register Account
           </button>
+          <p class="text-center text-md mt-4">
+            <PersonalRouter
+              :route="route"
+              :buttonText="buttonText"
+              class="sign-up-link hover:text-blue-500"
+            />
+          </p>
         </form>
       </form>
     </div>
@@ -104,7 +111,7 @@ import { storeToRefs } from "pinia";
 
 // Route Variables
 const route = "/auth/login";
-const buttonText = "Sign In";
+const buttonText = "Already have an account?";
 
 // Input Fields
 const email = ref("");
